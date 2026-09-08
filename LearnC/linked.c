@@ -63,15 +63,14 @@ void free_list(Node *head){
 int main(){
 
     //10,20,30,40
-    Node *list = NULL;  // an empty list
-    
+    Node *list = NULL;  // an empty list 
     list = prepend(list,10);   // 10 -> NULL
     list = prepend(list,20);  // 20 -> 10 -> NULL
-     //the number on the inside is the value, it doesn't create 10 nodes btw. 
+    //the number on the inside is the value, it doesn't create 10 nodes btw. 
     print_list(list);
-     //what if we wanted to prepend to the start of the list.
-
+    //what if we wanted to prepend to the start of the list.
     free_list(list);
-
+    
     return 0;
+
 }

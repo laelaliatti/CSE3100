@@ -140,31 +140,27 @@ int one_round(THost *hosts, int m, node *p_arr[], int n_arr, int k, int T)
     for(int i = 0; i < m; i++)
     {
         if(hosts[i].type == S)
-        {
-            int index = hash(idx(hosts[i].x, hosts[i].y, k)) % n_arr;
-
+    {
+        int index = hash(idx(hosts[i].x, hosts[i].y, k)) % n_arr;
             if(location_match(p_arr[index], hosts[i]))
             {
-                hosts[i].type = I;   // become infected
-                hosts[i].t = 0;      // reset infection timer
-            }
-        }
+            	hosts[i].type = I; //infect the suseptible host 
+				hosts[i].t = 0; //reset the infection time
+			}
         else if(hosts[i].type == I)
         {
-            hosts[i].t++;
-
-            if(hosts[i].t >= T)
-            {
-                hosts[i].type = R;   // recover
-            }
+           	hosts[i].t++;
+			if (hosts[i].t >= T){
+				hosts[i].type = R;
+			}
         }
     }
     //TODO: fill in code below
     //reset all linked lists
-    
+    }
     for (int i = 0; i < n_arr; i++){
 		remove_all(&p_arr[i]);
-    }
+	}
 
     
 
@@ -173,40 +169,41 @@ int one_round(THost *hosts, int m, node *p_arr[], int n_arr, int k, int T)
     for(int i = 0; i < m; i++)
     {
         int r = rand() % 4;
-
         switch(r)
-        {
-            case 0: // up
-                hosts[i].y++;
-                if(hosts[i].y > k) hosts[i].y = -k;
-                break;
-
-            case 1: // right
-                hosts[i].x++;
-                if(hosts[i].x > k) hosts[i].x = -k;
-                break;
-
-            case 2: // down
-                hosts[i].y--;
-                if(hosts[i].y < -k) hosts[i].y = k;
-                break;
-
-            case 3: // left
-                hosts[i].x--;
-                if(hosts[i].x < -k) hosts[i].x = k;
-                break;
-        }
-
+        {case 0: 
+			hosts[i].y++; 
+			if(hosts[i].y > k){
+			hosts[i].y = -k; 
+			}
+		break;
+    	case 1: 
+			hosts[i].x++; 
+			if(hosts[i].x > k){
+				hosts[i].x = -k;
+			}
+		break;
+    	case 2:  
+			hosts[i].y--; 
+			if(hosts[i].y < -k){
+				hosts[i].y = k;
+			}
+		break;
+    	case 3: 
+			hosts[i].x--;
+			if(hosts[i].x < -k){
+				hosts[i].x = k;
+			}
+		break;
+		}
 
 		//buid linked list for I hosts
 		if(hosts[i].type == I)
-        {
-            node *newnode = create_node(hosts[i]);
-            int index = hash(idx(hosts[i].x, hosts[i].y, k)) % n_arr;
-            add_first(&(p_arr[index]), newnode);
-        }
-    }
-
+		{
+			node *r = create_node(hosts[i]);
+			int index = hash(idx(hosts[i].x, hosts[i].y, k)) % n_arr;
+			add_first(&(p_arr[index]), r);
+		}
+	}
 
 	return summary(hosts, m);
 }

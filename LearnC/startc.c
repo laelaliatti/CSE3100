@@ -12,11 +12,17 @@ int main(){
     }
     printf("%d\n",sum);
     */
+   int a,b;
+   a = 13;
+   b = 2;
+   double c = a/b;
+
 
     int n;
     printf("enter an int:");
     scanf("%d", &n);        // This is the input n and it has to be a decimal or integer
     printf("Your input is: %d\n", n);  // because we have scan f set for bieng integers we can use it later
+    printf("%.1lf\n", c);
     return 0;
 }
     
